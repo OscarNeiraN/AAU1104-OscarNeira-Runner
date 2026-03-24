@@ -1,0 +1,9 @@
+on: [push]
+
+jobs:
+    mi-job:
+        uses: https://github.com/OscarNeiraN/AAU1104-OscarNeira-Primary/blob/main/.github/workflows/deploy-api.yaml@main
+
+        secrets:
+            DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
