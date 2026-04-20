@@ -1,10 +1,10 @@
 on:
   push:
     branches:
-      - "**"
-      - "!main"
+      - '**'
+      - '!main'
     tags-ignore:
-      - "v*.*.*"
+      - 'v*.*.*'
    
 
 
