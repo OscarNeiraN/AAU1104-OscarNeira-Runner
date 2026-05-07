@@ -3,7 +3,7 @@
 API académica mínima en **Node.js** y **Express**, pensada para practicar contenedores y pruebas con `curl`. Responde siempre en **JSON**.
 
 ## Requisitos
-
+dsdsd
 - Node.js 20+ (ejecución local)
 - Docker (ejecución en contenedor)
 
