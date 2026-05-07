@@ -7,7 +7,7 @@ on:
 jobs:
   usar-receta-compartida:
     # Aquí no repetimos los pasos de Docker: delegamos al otro repositorio
-    uses: asanchezo-duoc/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
+    uses: OscarNeiraN/AAU1104-OscarNeira-Primary/.github/workflows/deploy-api.yaml@main
 
     # Valores que le “pasamos” a la receta (alineado a deploy-api.yaml en SharedWorkflows)
     with:
