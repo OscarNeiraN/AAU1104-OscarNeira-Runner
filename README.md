@@ -8,7 +8,7 @@ dsdsd
 - Docker (ejecución en contenedor)
 
 ## Ejecución local
-
+sdsdsdsd
 ```bash
 npm install
 npm start
