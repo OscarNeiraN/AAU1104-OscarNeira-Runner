@@ -1,5 +1,5 @@
 # API de ejemplo — AUY1104 (Express + Docker)
-
+aassas
 API académica mínima en **Node.js** y **Express**, pensada para practicar contenedores y pruebas con `curl`. Responde siempre en **JSON**.
 
 ## Requisitos
