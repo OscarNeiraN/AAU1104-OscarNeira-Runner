@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: oneiran/demo-api:latest
+          image: oneiran/demo-api:algooooo
           imagePullPolicy: Always
           ports:
             - name: http
