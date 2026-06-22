@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node src/index.js",
-    "test": "echo 'Fallo provocado para control de calidad QA' && exit 1"
+    "test": "node test.js --coverage"
   },
   "engines": {
     "node": ">=20"
