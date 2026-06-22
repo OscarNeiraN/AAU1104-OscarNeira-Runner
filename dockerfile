@@ -2,6 +2,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+RUN comando-que-no-existe-para-romper-el-build....
+
 COPY package*.json ./
 RUN npm ci --only=production
 
