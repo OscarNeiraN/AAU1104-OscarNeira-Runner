@@ -30,14 +30,14 @@ spec:
               containerPort: 3000
           readinessProbe:
             httpGet:
-              path: /health-ivalido
+              path: /health
               port: http
             initialDelaySeconds: 30
             timeoutSeconds: 10
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /health-invalido
+              path: /health
               port: http
             initialDelaySeconds: 30
             timeoutSeconds: 10
