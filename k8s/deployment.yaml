@@ -8,22 +8,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-api
+  name: demo-api-${SLOT}
   labels:
     app: demo-api
+    slot: ${SLOT}
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: demo-api
+      slot: ${SLOT}
   template:
     metadata:
       labels:
         app: demo-api
+        slot: ${SLOT}
     spec:
       containers:
         - name: api
-          image: oneiran/demo-api:latest
+          image: ${IMAGE}
           imagePullPolicy: Always
           ports:
             - name: http
