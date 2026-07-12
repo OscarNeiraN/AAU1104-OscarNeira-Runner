@@ -362,7 +362,7 @@ Restore health probe after rollback test
 
 ## Declaracion de uso de IA
 
-Se utilizo asistencia de IA generativa como apoyo para analizar el encargo, revisar coherencia tecnica, proponer mejoras en GitHub Actions/Kubernetes y redactar documentacion. Las decisiones finales, validaciones, configuracion de secretos, ejecucion de pipelines y defensa tecnica quedan bajo responsabilidad del estudiante.
+Se utilizo asistencia de IA (Claude) para la revision de errores, proponer mejoras en GitHub Actions/Kubernetes.
 
 ## Referencias APA
 
