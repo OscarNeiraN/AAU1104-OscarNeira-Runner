@@ -362,7 +362,7 @@ Restore health probe after rollback test
 
 ## Declaracion de uso de IA
 
-Se utilizo asistencia de IA (Claude) para la revision de errores, proponer mejoras en GitHub Actions/Kubernetes.
+Se utilizo asistencia de IA (Claude) para la revision de errores, proponer mejoras en GitHub Actions/Kubernetes y documentacion.
 
 ## Referencias APA
 
