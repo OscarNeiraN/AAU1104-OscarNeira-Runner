@@ -1,33 +1,38 @@
-# Misma convención que client.yaml → image-name: demo-api
-# Sustituir YOUR_DOCKERHUB_USERNAME por tu usuario (igual que secret DOCKER_USERNAME).
-# La receta deploy-api publica: <usuario>/demo-api:<tag> y :latest
-#
-# Borde HTTP: no duplicar HAProxy aquí. Aplicar primero en el cluster
-# AUY1104-SharedWorkflows k8s-manifests/haproxy-academic/shared/
-# (ea2-haproxy-academic). Ruta pública :30088 …/backend/* → este Service demo-api:3000.
+# Template Blue-Green. El workflow reemplaza ${APP_NAME}, ${SLOT} e ${IMAGE}
+# antes de aplicar el manifiesto en K3s.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-api-${SLOT}
+  name: ${APP_NAME}-${SLOT}
   labels:
-    app: demo-api
-    slot: ${SLOT}
+    app: ${APP_NAME}
+    version: ${SLOT}
 spec:
-  replicas: 1
+  replicas: 3
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: demo-api
-      slot: ${SLOT}
+      app: ${APP_NAME}
+      version: ${SLOT}
   template:
     metadata:
       labels:
-        app: demo-api
-        slot: ${SLOT}
+        app: ${APP_NAME}
+        version: ${SLOT}
     spec:
       containers:
         - name: api
           image: ${IMAGE}
           imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: DEPLOYMENT_SLOT
+              value: ${SLOT}
+            - name: DEPLOYMENT_VERSION
+              value: ${SLOT}
+            - name: DEPLOYED_IMAGE
+              value: ${IMAGE}
           ports:
             - name: http
               containerPort: 3000
@@ -35,13 +40,23 @@ spec:
             httpGet:
               path: /health
               port: http
-            initialDelaySeconds: 30
-            timeoutSeconds: 10
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
             periodSeconds: 10
+            failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /health
               port: http
-            initialDelaySeconds: 30
-            timeoutSeconds: 10
+            initialDelaySeconds: 15
+            timeoutSeconds: 5
             periodSeconds: 10
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+
