@@ -1,25 +1,31 @@
+name: Release API Blue-Green
+
 on:
   push:
     tags:
-      # Solo cuando el tag parece una versión: v1.0.0, v2.3.4, etc.
+      - "*"
   workflow_dispatch:
+    inputs:
+      image_tag:
+        description: Docker image tag to deploy from manual dispatch.
+        required: true
+        default: v1.0.0
+        type: string
+
+permissions:
+  contents: read
 
 jobs:
   usar-receta-compartida:
-    # Aquí no repetimos los pasos de Docker: delegamos al otro repositorio
-    uses: OscarNeiraN/AAU1104-OscarNeira-Primary/.github/workflows/deploy-api.yaml@main
-
-    # Valores que le “pasamos” a la receta (alineado a deploy-api.yaml en SharedWorkflows)
+    name: Build, publish and deploy
+    uses: OscarNeira/AAU1104-OscarNeira-Primary/.github/workflows/deploy-api.yaml@main
     with:
       image-name: demo-api
-
-      # Mismo nombre que el tag que disparó el workflow (ej. v1.2.3 → la imagen lleva esa “versión”)
-      image-tag: ${{ github.ref_name }}
-
-      # Variable de repo (Settings → Secrets and variables → Actions → Variables)
+      image-tag: ${{ github.event_name == 'workflow_dispatch' && inputs.image_tag || github.ref_name }}
       k3s-server-public-ip: ${{ vars.K3S_SERVER_PUBLIC_IP }}
-
-    # Mismos secretos que declara workflow_call en deploy-api.yaml (DOCKER_* + SSH al nodo K3s)
+      k8s-namespace: ${{ vars.K8S_NAMESPACE || 'orders' }}
+      app-name: orders
+      service-name: orders-svc
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
