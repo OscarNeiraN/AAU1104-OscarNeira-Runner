@@ -1,5 +1,3 @@
-# Template Blue-Green. El workflow reemplaza ${APP_NAME}, ${SLOT} e ${IMAGE}
-# antes de aplicar el manifiesto en K3s.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -38,7 +36,7 @@ spec:
               containerPort: 3000
           readinessProbe:
             httpGet:
-              path: /health-fail
+              path: /health
               port: http
             initialDelaySeconds: 5
             timeoutSeconds: 5
@@ -46,7 +44,7 @@ spec:
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: /health-fail
+              path: /health
               port: http
             initialDelaySeconds: 15
             timeoutSeconds: 5
