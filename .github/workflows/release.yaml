@@ -18,7 +18,7 @@ permissions:
 jobs:
   usar-receta-compartida:
     name: Build, publish and deploy
-    uses: OscarNeira/AAU1104-OscarNeira-Primary/.github/workflows/deploy-api.yaml@main
+    uses: OscarNeiraN/AAU1104-OscarNeira-Primary/.github/workflows/deploy-api.yaml@main
     with:
       image-name: demo-api
       image-tag: ${{ github.event_name == 'workflow_dispatch' && inputs.image_tag || github.ref_name }}
